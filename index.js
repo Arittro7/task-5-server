@@ -1,40 +1,30 @@
-const express = require('express');
-const cors = require('cors');
-const { generateBooks } = require('./bookGenerator');
+// index.js
+const express = require('express')
+const cors = require('cors')
+const bookGenerator = require('./bookGenerator')
 
-const app = express();
-const PORT = process.env.PORT || 5000;
+const app = express()
+const port = 5000
 
-const corsOptions = {
-  origin: 'https://bdgentask5.netlify.app',
-  optionsSuccessStatus: 200
-};
+// simple CORS setup
+app.use(cors())
+app.use(express.json())
 
-app.use(cors(corsOptions));
-app.use(express.json());
+app.get('/', function (req, res) {
+  res.send('📚 Book Generator API is running!')
+})
 
-app.get('/', (req, res) => {
-  res.send('Book Generator API is running successfully!');
-});
-// ------------------------------
-
-app.get('/api/books', (req, res) => {
-  const { locale = 'en_US', seed = 123, page = 1, likesError = 0, reviewsError = 0 } = req.query;
-
+app.get('/api/books', function (req, res) {
   try {
-    const books = generateBooks({
-      locale,
-      seed,
-      page,
-      likesError,
-      reviewsError
-    });
-    res.json(books);
-  } catch (error) {
-    res.status(500).json({ message: 'Failed to generate data', error: error.message });
+    var query = req.query
+    var books = bookGenerator.generateBooks(query)
+    res.json(books)
+  } catch (err) {
+    console.log('❌ Error:', err)
+    res.status(500).json({ message: 'Internal Server Error' })
   }
-});
+})
 
-app.listen(PORT, () => {
-  console.log(`📖 Book Generator server is running port:${PORT}`);
-});
+app.listen(port, function () {
+  console.log('📖 Server is running on http://localhost:' + port)
+})

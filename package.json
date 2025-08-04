@@ -1,14 +1,17 @@
 {
-  "name": "task-5-server",
   "version": "1.0.0",
-  "description": "Backend for the book data generator",
+  "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
   "dependencies": {
-    "@faker-js/faker": "^8.4.1",
+    "@faker-js/faker": "^9.9.0",
     "cors": "^2.8.5",
-    "express": "^4.19.2"
+    "express": "^5.1.0"
   }
 }
