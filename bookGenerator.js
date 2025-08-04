@@ -44,7 +44,7 @@ function generateBooks(query) {
       likes: getCount(likesError),
       reviews: reviewCount,
       reviewDetails: reviews,
-      coverUrl: 'https://placehold.co/300x400/596E79/EAE0D5?text=' + encodeURIComponent(title)
+      // coverUrl: 'https://placehold.co/300x400/596E79/EAE0D5?text=' + encodeURIComponent(title)
     }
 
     books.push(book)
